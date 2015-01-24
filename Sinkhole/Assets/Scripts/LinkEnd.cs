@@ -32,6 +32,8 @@ public class LinkEnd : MonoBehaviour {
 			transform.position = otherHand.transform.position;
 			currentParent = otherHand.rigidbody2D;
 			
+			disableGrabbable(other.transform);
+			
 		}
 	}
 	
@@ -43,6 +45,14 @@ public class LinkEnd : MonoBehaviour {
 			}
 		}
 		return other;
+	}
+	
+	void disableGrabbable(Transform hand){
+		foreach(Transform t in hand.parent){
+			if(t.GetComponent<Grabable>()!= null){
+				t.GetComponent<Grabable>().grabable = false;
+			}
+		}
 	}
 
 
