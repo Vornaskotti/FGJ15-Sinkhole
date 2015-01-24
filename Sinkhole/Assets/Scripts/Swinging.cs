@@ -3,14 +3,14 @@ using System.Collections;
 
 public class Swinging : MonoBehaviour {
 
-	public GameState gameState;
+	private GameState gameState;
 	
 	private float speed = 800f;
 	private bool incVelocity = true;
 	
 	
 	void Start() {
-	
+		gameState = GameObject.Find("GameState").GetComponent<GameState>();
 	}
 	// Update is called once per frame
 	void Update () {

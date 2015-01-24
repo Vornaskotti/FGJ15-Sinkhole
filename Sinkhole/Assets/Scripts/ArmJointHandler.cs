@@ -3,14 +3,14 @@ using System.Collections;
 
 public class ArmJointHandler : MonoBehaviour {
 
-	public GameState gameState;
+	private GameState gameState;
 	
 	public float maxForce = 1000f;
 	public HingeJoint2D joint = null;
 	
 	// Use this for initialization
 	void Start () {
-	
+		gameState = GameObject.Find("GameState").GetComponent<GameState>();
 	}
 	
 	// Update is called once per frame
