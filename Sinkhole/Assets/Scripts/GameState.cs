@@ -13,12 +13,16 @@ public class GameState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.Space) && currentGrab == null){
-			grab();
-		}
-		else if(!Input.GetKey(KeyCode.Space) && currentGrab != null){
-			releaseGrab();
-		}	
+		if(Input.GetKey(KeyCode.Space)) {
+      if (currentGrab == null)
+			  grab();
+		} else {
+      releaseGrab();
+//      print("release");
+    }
+//		else if(!Input.GetKey(KeyCode.Space) && currentGrab != null){
+//			releaseGrab();
+//		}
 	}
 	
 	public Rigidbody2D getFree(){
@@ -33,11 +37,13 @@ public class GameState : MonoBehaviour {
 	}
 	
 	void grab(){ // Grabs with higher link end
-			if(linkEnd1.transform.position.y > linkEnd2.transform.position.y){
+    LinkEnd l1 = linkEnd1.GetComponent<LinkEnd>();
+    LinkEnd l2 = linkEnd2.GetComponent<LinkEnd>();
+			if(linkEnd1.transform.position.y > linkEnd2.transform.position.y && l1.canGrab) {
 				linkEnd1.isKinematic = true;
 				currentGrab = linkEnd1;
 			}
-			else{
+			else if (l2.canGrab) { 
 				linkEnd2.isKinematic = true;
 				currentGrab = linkEnd2;
 			}
