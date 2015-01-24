@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour {
 
   public float camSpeed;
   public float camMin;
+  public float followRate;
   
   public Transform endBall1;
   public Transform endBall2;
@@ -27,7 +28,7 @@ public class CameraMovement : MonoBehaviour {
       float newY = chainmiddle.y;
       newY = Mathf.Max(newY, camMin);
       float x = curve.getOffset(newY);
-      transform.position = Vector3.Lerp(transform.position, new Vector3(x, newY, transform.position.z), Time.deltaTime);
+      transform.position = Vector3.Lerp(transform.position, new Vector3(x, newY, transform.position.z), Time.deltaTime * followRate);
     }
 	}
 }
