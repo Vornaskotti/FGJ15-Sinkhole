@@ -33,10 +33,11 @@ public class LavaWave : MonoBehaviour {
         points[x + y * resolutionX].position = 
           new Vector3(
             (x - resolutionX/2) * stepWidth, 
-            -(y + Mathf.Sin(Mathf.Floor(camera.position.x) + x*stepWidth + Time.time) * waveHeight) * stepHeight - 2.0f * waveHeight,
+            -(y + Mathf.Sin(Mathf.Floor(camera.position.x) + x*stepWidth + Time.time) * waveHeight + 
+			      Mathf.Cos(-0.5f*(x*stepWidth + Mathf.Floor(camera.position.x)) + Time.time) * waveHeight) * stepHeight - 2.0f * waveHeight,
              1);
         points[x + y * resolutionX].color = new Color(1f, 0f, 0f);
-        points[x + y * resolutionX].size = 1.0f;
+        points[x + y * resolutionX].size = 3.0f;
       }
     }
 		particleSystem.SetParticles(points, points.Length);
