@@ -25,7 +25,6 @@ public class LinkEnd : MonoBehaviour {
 			newJoint.anchor = parentGrab.grabPoint;
 			newJoint.connectedBody = other.rigidbody2D;
 			newJoint.connectedAnchor = other.gameObject.GetComponent<Grabable>().grabPoint;
-			
 			Transform otherHand = getOtherHand(other.transform);
 			joint.connectedBody = otherHand.rigidbody2D;
 			joint.connectedAnchor = otherHand.GetComponent<Grabable>().grabPoint;
