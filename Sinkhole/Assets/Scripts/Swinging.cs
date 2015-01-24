@@ -3,15 +3,21 @@ using System.Collections;
 
 public class Swinging : MonoBehaviour {
 
+	public GameState gameState;
+	
 	private float speed = 4f;
 	private bool incVelocity = true;
-
+	
+	
+	void Start() {
+	
+	}
 	// Update is called once per frame
 	void Update () {
-		if(GameState.currentGrab != null){
+		if(gameState.currentGrab != null){
 			float ix = Input.GetAxis("Horizontal");
 	
-			Vector3 vec = this.transform.position - GameState.currentGrab.transform.position;
+			Vector3 vec = this.transform.position - gameState.currentGrab.transform.position;
 			float r = vec.magnitude;
 	
 			Vector3 tangent = (Vector3.Cross(vec, Vector3.back)).normalized;
