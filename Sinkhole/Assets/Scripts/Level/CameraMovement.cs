@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
   public LevelGenerator levelGenerator;
-  public GameState gameState;
+  private GameState gameState;
 
   public float camSpeed;
   public float camMin;
@@ -14,6 +14,7 @@ public class CameraMovement : MonoBehaviour {
   public Transform endBall2;
 	// Use this for initialization
 	void Start () {
+		gameState = GameObject.Find("GameState").GetComponent<GameState>();
 	}
 	
 	// Update is called once per frame
