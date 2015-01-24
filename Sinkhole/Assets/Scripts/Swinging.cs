@@ -5,7 +5,7 @@ public class Swinging : MonoBehaviour {
 
 	private GameState gameState;
 	
-	private float speed = 800f;
+	private float speed = 4f;
 	private bool incVelocity = true;
 	
 	
