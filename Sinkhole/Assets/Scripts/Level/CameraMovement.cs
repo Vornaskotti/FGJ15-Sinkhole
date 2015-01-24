@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    if (gameState.currentGrab == null) {
+    if (GameState.currentGrab == null) {
       Curve curve = levelGenerator.curve;
       float delta = Time.deltaTime;
       float y = Input.GetAxis("Vertical");

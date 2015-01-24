@@ -5,7 +5,7 @@ public class GameState : MonoBehaviour {
 	public Rigidbody2D linkEnd1;
 	public Rigidbody2D linkEnd2;
 	
-	public Rigidbody2D currentGrab;
+	public static Rigidbody2D currentGrab;
 	
 	// Use this for initialization
 	void Start () {
