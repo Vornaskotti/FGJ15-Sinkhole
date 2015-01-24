@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Swinging : MonoBehaviour {
 
-	private float speed = 6f;
+	private float speed = 4f;
 	private bool incVelocity = true;
 
 	// Update is called once per frame
