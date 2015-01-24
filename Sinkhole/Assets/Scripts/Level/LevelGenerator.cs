@@ -26,7 +26,6 @@ public class LevelGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     Curve curve = new Curve(levelHeight, curveSteps, maxCurveOffset);
-    print("points: " + curve.points[3]);
     int wallHeight = wall.GetComponent<WallGenerator>().height;
     float halfWidth = levelWidth / 2;
 		for (int i = 0; i < levelHeight; i += wallHeight) {
