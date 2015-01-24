@@ -5,6 +5,8 @@ public class Grabable : MonoBehaviour {
 	public bool grabable = true;
 	public Vector2 grabPoint = Vector2.zero;
 	public Transform pairObject;
+	public Transform grabbedWith;
+	
 	// Use this for initialization
 	void Start () {
 		foreach(Transform t in transform.parent){

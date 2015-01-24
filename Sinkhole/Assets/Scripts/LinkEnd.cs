@@ -27,6 +27,9 @@ public class LinkEnd : MonoBehaviour {
 	
 			Grabable parentGrab = currentParent.GetComponent<Grabable>();
 			
+			currentParent.GetComponent<Grabable>().grabbedWith = other.transform;
+			other.GetComponent<Grabable>().grabbedWith = currentParent.transform;
+			
 			currentParent.GetComponent<ArmJointHandler>().joint = newJoint;
 			
 			newJoint.anchor = parentGrab.grabPoint;

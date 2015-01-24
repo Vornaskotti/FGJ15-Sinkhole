@@ -5,7 +5,7 @@ public class GameState : MonoBehaviour {
 	public Rigidbody2D linkEnd1;
 	public Rigidbody2D linkEnd2;
 	
-	public static Rigidbody2D currentGrab;
+	public Rigidbody2D currentGrab;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,6 +23,11 @@ public class GameState : MonoBehaviour {
 //		else if(!Input.GetKey(KeyCode.Space) && currentGrab != null){
 //			releaseGrab();
 //		}
+	}
+	
+	public Rigidbody2D getFree(){
+		if(currentGrab == linkEnd1) return linkEnd2;
+		else return linkEnd1;
 	}
 	
 	void releaseGrab(){
@@ -43,4 +48,5 @@ public class GameState : MonoBehaviour {
 				currentGrab = linkEnd2;
 			}
 		}
+		
 }
