@@ -6,6 +6,8 @@ public class LinkEnd : MonoBehaviour {
 	// Use this for initialization
 	private Rigidbody2D currentParent;
 	private HingeJoint2D joint;
+  
+  public bool canGrab = false;
 	
 	void Start () {
 		joint = this.GetComponent<HingeJoint2D>();
@@ -19,7 +21,7 @@ public class LinkEnd : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		Grabable otherGrab = other.GetComponent<Grabable>();
-		if(otherGrab != null && otherGrab.grabable){ // Grab and move link end to link's new end
+		if(otherGrab != null && otherGrab.grabable) { // Grab and move link end to link's new end
 		
 			HingeJoint2D newJoint = currentParent.gameObject.AddComponent("HingeJoint2D") as HingeJoint2D;
 	
@@ -40,8 +42,16 @@ public class LinkEnd : MonoBehaviour {
 			
 			disableGrabbable(other.transform);
 			
-		}
+		} else if (other.tag == "SceneGrabbable") {
+      canGrab = true;
+    }
 	}
+  
+  void OnTriggerExit2D(Collider2D other) {
+    if (other.tag == "SceneGrabbable") {
+      canGrab = false;
+    }
+  }
 	
 	Transform getOtherHand(Transform hand){
 		return hand.GetComponent<Grabable>().pairObject;
