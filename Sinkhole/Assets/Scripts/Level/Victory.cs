@@ -15,7 +15,10 @@ public class Victory : MonoBehaviour {
 	
 	}
 	
-	void OnTriggerEnter2D() {
-    gameState.hasWon = true;
+	void OnTriggerEnter2D(Collider2D t) {
+		if(t.transform == gameState.linkEnd1.transform || t.transform == gameState.linkEnd2.transform){
+			gameState.hasWon = true;
+		}
+
 	}
 }
