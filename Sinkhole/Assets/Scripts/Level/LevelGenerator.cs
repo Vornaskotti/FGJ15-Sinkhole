@@ -46,11 +46,11 @@ public class LevelGenerator : MonoBehaviour {
     
     float previousCoordinateY = 0.0f;
     
-    while (previousCoordinateY < levelHeight - wallHeight) {
+    while (previousCoordinateY < levelHeight - wallHeight * 2) {
       previousCoordinateY = addRock(previousCoordinateY, curve);
     }
     previousCoordinateY = 0.0f;
-    while (previousCoordinateY < levelHeight - wallHeight) {
+    while (previousCoordinateY < levelHeight - wallHeight * 2) {
       previousCoordinateY = addRock(previousCoordinateY, curve);
     }
 	}
