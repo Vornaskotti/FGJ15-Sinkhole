@@ -52,9 +52,14 @@ public class GameState : MonoBehaviour {
 		else return linkEnd1.transform;
 	}
 	
+	public bool isBall(Transform t){
+		return t == linkEnd1.transform || t == linkEnd2.transform;
+	}
+	
 	void grab(){ // Grabs with higher link end
     LinkEnd l1 = linkEnd1.GetComponent<LinkEnd>();
     LinkEnd l2 = linkEnd2.GetComponent<LinkEnd>();
+    
 			if(linkEnd1.transform.position.y > linkEnd2.transform.position.y && l1.canGrab) {
 				linkEnd1.isKinematic = true;
 				currentGrab = linkEnd1;
