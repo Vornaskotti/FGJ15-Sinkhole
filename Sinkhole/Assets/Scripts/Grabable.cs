@@ -18,7 +18,6 @@ public class Grabable : MonoBehaviour {
 			print ("No pair object found!");
 		}
 	}
-	
 	// Update is called once per frame
 	void Update () {
 	
