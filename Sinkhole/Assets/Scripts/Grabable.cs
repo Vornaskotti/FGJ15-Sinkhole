@@ -24,12 +24,12 @@ public class Grabable : MonoBehaviour {
 	}
 	
 	public void letGo(){
-		print ("letGo" + transform.parent.name + ", " + transform.name);
+		//print ("letGo" + transform.parent.name + ", " + transform.name);
 			if(transform.GetComponents<HingeJoint2D>() != null){
-			print ("has joints");
+			//print ("has joints");
 				foreach(HingeJoint2D h in transform.GetComponents<HingeJoint2D>()){
 				if(h.connectedBody == grabbedWith.rigidbody2D){
-						print (transform.name + " hinge deactivated with " + h.connectedBody.name);
+						//print (transform.name + " hinge deactivated with " + h.connectedBody.name);
 						transform.GetComponent<Grabable>().grabable = true;
 						h.connectedBody.GetComponent<Grabable>().grabable = true;
 						h.enabled = false;

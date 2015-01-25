@@ -50,7 +50,7 @@ public class ArmJointHandler : MonoBehaviour {
 	}
 	
 	void deactivatePersonsRecursive(Transform torso){
-		//print ("deactivating "  + torso.name);
+		print ("deactivating "  + torso.name);
 		if(torso.GetComponent<Swinging>().enabled){
 			torso.GetComponent<Swinging>().enabled = false;
 			Transform leftHand = torso.transform.FindChild("left_arm");
@@ -58,14 +58,16 @@ public class ArmJointHandler : MonoBehaviour {
 			
 			if(getNextEnd(leftHand) != null){
 				Transform leftTorso = getNextEnd(leftHand).parent;
-				leftHand.GetComponent<Grabable>().letGo();
+				if(leftHand.GetComponent<Grabable>() != null)
+					leftHand.GetComponent<Grabable>().letGo();
 				//print ("leftTorso" + leftTorso.name);
 				deactivatePersonsRecursive(leftTorso);
 				
 			}
 			if(getNextEnd(rightHand) != null){
 				Transform rightTorso = getNextEnd(rightHand).parent;
-				rightHand.GetComponent<Grabable>().letGo();
+				if (rightHand.GetComponent<Grabable>() != null)
+					rightHand.GetComponent<Grabable>().letGo();
 				//print ("rightTorso" + rightTorso.name);
 				deactivatePersonsRecursive(rightTorso);
 			}
@@ -73,12 +75,7 @@ public class ArmJointHandler : MonoBehaviour {
 	} 
 	
 	void handleBreak(){
-		if(gameState.currentGrab != null){
-			handleBreakGrabbed();
-		} else{
-			
-		}
-		
+		handleBreakGrabbed();
 	}
 	
 	Transform getTorsosFrom(Transform t){
@@ -110,16 +107,24 @@ public class ArmJointHandler : MonoBehaviour {
 	}
 	
 	void handleBreakGrabbed(){
-		Transform holdHandPair = 
-			gameState.currentGrab.GetComponent<HingeJoint2D>().connectedBody.GetComponent<Grabable>().pairObject;
+		Transform holdHandPair;
+		if(gameState.currentGrab != null){
+			holdHandPair = gameState.currentGrab.GetComponent<HingeJoint2D>().connectedBody.GetComponent<Grabable>().pairObject;
+		}else{
+			holdHandPair = gameState.getHigher().GetComponent<HingeJoint2D>().connectedBody.GetComponent<Grabable>().pairObject;
+		}
 		
-
 		Transform nextEnd = getLastEnd(holdHandPair);
 		// Move another ball to current
-		Transform freeEnd = gameState.getFree().transform;
+		Transform freeBall = gameState.getFree().transform;
 		
-		freeEnd.position = nextEnd.transform.position;
-		freeEnd.GetComponent<HingeJoint2D>().connectedBody = nextEnd.rigidbody2D;
+		if(gameState.currentGrab == null){
+			print ("nongrab break");
+			freeBall = gameState.getAnother(holdHandPair).transform;
+		}
+		
+		freeBall.position = nextEnd.transform.position;
+		freeBall.GetComponent<HingeJoint2D>().connectedBody = nextEnd.rigidbody2D;
 	}
 	
 	HingeJoint2D getRightHinge(HingeJoint2D[] hinges){

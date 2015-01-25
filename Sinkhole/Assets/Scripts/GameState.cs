@@ -41,6 +41,17 @@ public class GameState : MonoBehaviour {
 		linkEnd2.isKinematic = false;
 	}
 	
+	public Transform getHigher(){
+		if(linkEnd1.transform.position.y > linkEnd2.transform.position.y) {
+			return linkEnd1.transform;
+		} else return linkEnd2.transform;
+	}
+	
+	public Transform getAnother(Transform t){
+		if(t == linkEnd1.transform) return linkEnd2.transform;
+		else return linkEnd1.transform;
+	}
+	
 	void grab(){ // Grabs with higher link end
     LinkEnd l1 = linkEnd1.GetComponent<LinkEnd>();
     LinkEnd l2 = linkEnd2.GetComponent<LinkEnd>();
@@ -51,6 +62,10 @@ public class GameState : MonoBehaviour {
 			else if (l2.canGrab) { 
 				linkEnd2.isKinematic = true;
 				currentGrab = linkEnd2;
+			} 
+			else if(l1.canGrab){
+				linkEnd1.isKinematic = true;
+				currentGrab = linkEnd1;
 			}
 		}
 		
