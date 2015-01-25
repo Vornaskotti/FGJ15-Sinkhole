@@ -17,14 +17,16 @@ public class WaveGenerator : MonoBehaviour {
 	public float waveProbability;
 	
 	private int checkCounter;
+  
+  public float levelWidth;
 	
 	// Update is called once per frame
 	void Update () {
 		waveTimer += Time.deltaTime;
 		
-		if (waveTimer > checkPeriod * checkPeriod) {
+		if (waveTimer > checkCounter * checkPeriod) {
 			checkCounter++;
-			
+			spawnRandomWave();
 		}
 	}
 	
@@ -32,7 +34,10 @@ public class WaveGenerator : MonoBehaviour {
 		float r = Random.Range(0.0f, 1.0f);
 		if (r <= waveProbability) {
 			int rWave = Random.Range(0, waves.Length);
-			Instantiate(waves[rWave]);
+			Wave wave = Instantiate(waves[rWave]) as Wave;
+      wave.follow = this.transform;
+//      float x = Random.Range(-levelWidth/2.0f + 1.0f, levelWidth/2.0f - 1.0f);
+//      wave.offset = new Vector3(x, 0, 0);
 		}
 	}
 }
