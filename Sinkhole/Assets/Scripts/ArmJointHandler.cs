@@ -31,11 +31,44 @@ public class ArmJointHandler : MonoBehaviour {
 				Destroy(joint);
 				Transform sp1End = getLastEnd(split1.GetComponent<Grabable>().pairObject);
 				Transform sp2End = getLastEnd(split2.GetComponent<Grabable>().pairObject);
+				if(gameState.linkEnd1.GetComponent<HingeJoint2D>().connectedBody.transform == sp1End && 
+				   gameState.linkEnd2.GetComponent<HingeJoint2D>().connectedBody.transform == split1){
+				   // sp2End is free one
+					//print ("sp1End is not free " + sp1End.parent.name + split1.parent.name);
+					//print ("sp2End is FREE " + sp2End.parent.name + split2.parent.name);
+					deactivatePersonsRecursive(sp2End.parent);
+				 } else {
+					// sp1End is free one
+					//print ("sp2End is not free " + sp2End.parent.name + split2.parent.name);
+					//print ("sp1End is FREE " + sp1End.parent.name + split1.parent.name);
+					deactivatePersonsRecursive(sp1End.parent);
+				 }
 				//print ("sp1End " + sp1End.parent.name);
 				//print ("sp2End " + sp2End.parent.name);
 			}
 		}
 	}
+	
+	void deactivatePersonsRecursive(Transform torso){
+		print ("deactivating "  + torso.name);
+		if(torso.GetComponent<Swinging>().enabled){
+			torso.GetComponent<Swinging>().enabled = false;
+			Transform leftHand = torso.transform.FindChild("left_arm");
+			Transform rightHand = torso.transform.FindChild("right_arm");
+			
+			if(getNextEnd(leftHand) != null){
+				Transform leftTorso = getNextEnd(leftHand).parent;
+				print ("leftTorso" + leftTorso.name);
+				deactivatePersonsRecursive(leftTorso);
+				
+			}
+			if(getNextEnd(rightHand) != null){
+				Transform rightTorso = getNextEnd(rightHand).parent;
+				print ("rightTorso" + rightTorso.name);
+				deactivatePersonsRecursive(rightTorso);
+			}
+		}
+	} 
 	
 	void handleBreak(){
 		if(gameState.currentGrab != null){
@@ -58,15 +91,6 @@ public class ArmJointHandler : MonoBehaviour {
 						
 		}
 		return nextEnd;
-	}
-	
-	Transform getNext(Transform t, Transform last){
-		if(t.GetComponent<Grabable>().grabbedWith != null && t.GetComponent<Grabable>().grabbedWith.transform != last) 
-			return t.GetComponent<Grabable>().grabbedWith.transform;
-		else if(t.GetComponent<Grabable>().pairObject.transform != last)
-			return t.GetComponent<Grabable>().pairObject.transform;
-		else
-			return null;
 	}
 	
 	Transform getNextEnd(Transform t){
