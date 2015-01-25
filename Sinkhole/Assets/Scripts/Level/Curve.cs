@@ -22,6 +22,10 @@ public class Curve {
     float yStep = y / stepSize;
     int lowerIndex = (int)Mathf.Floor(yStep);
     int upperIndex = lowerIndex + 1;
+    if (lowerIndex >= points.Length - 1) {
+    	lowerIndex = points.Length - 2;
+    	upperIndex = points.Length - 1;
+    }
     float a = points[lowerIndex];
     float b = points[upperIndex];
     float mu = yStep - lowerIndex;
