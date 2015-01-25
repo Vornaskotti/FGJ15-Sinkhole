@@ -28,16 +28,17 @@ public class LevelGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     curve = new Curve(levelHeight, curveSteps, maxCurveOffset);
-    int wallHeight = wall.GetComponent<WallGenerator>().height;
+    int wallHeight = (int)wall.transform.localScale.y;
     float halfWidth = levelWidth / 2;
-	  for (int i = 0; i < levelHeight; i += wallHeight) {
-      GameObject leftWall = Instantiate(wall, new Vector3(-halfWidth, i, 0.0f), Quaternion.identity) as GameObject;
-      WallGenerator leftWallGen = leftWall.GetComponent<WallGenerator>();
-      leftWallGen.createLeftWall(wallHeight, curve);
+	  for (int i = wallHeight; i < levelHeight - wallHeight; i += wallHeight) {
+      GameObject leftWall = Instantiate(wall, new Vector3(-halfWidth - 20, i + 40, 0.0f), Quaternion.identity) as GameObject;
+//      WallGenerator leftWallGen = leftWall.GetComponent<WallGenerator>();
+//      leftWallGen.createLeftWall(wallHeight, curve);
       
-      GameObject rightWall = Instantiate(wall, new Vector3(halfWidth, i, 0.0f), Quaternion.identity) as GameObject;
-      WallGenerator rightWallGen = rightWall.GetComponent<WallGenerator>();
-      rightWallGen.createRightWall(wallHeight, curve);
+      GameObject rightWall = Instantiate(wall, new Vector3(halfWidth + 20, i + 40, 0.0f), Quaternion.identity) as GameObject;
+      rightWall.transform.localScale = new Vector3(-1.0f * rightWall.transform.localScale.x, rightWall.transform.localScale.y, rightWall.transform.localScale.z);
+//      WallGenerator rightWallGen = rightWall.GetComponent<WallGenerator>();
+//      rightWallGen.createRightWall(wallHeight, curve);
     }
     
     for (int i = backgroundHeight; i < levelHeight - backgroundHeight; i += backgroundHeight) {
