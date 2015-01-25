@@ -30,7 +30,7 @@ public class LavaRock : MonoBehaviour {
 			particles.GetComponent<ParticleSystem>().enableEmission = false;
 			explosion = Instantiate(explosionParticles, this.transform.position, Quaternion.identity) as GameObject;
 			GameObject.Destroy(particles, 5f);
-			GameObject.Destroy(this.gameObject);
+			GameObject.Destroy(this.gameObject, 0.1f);
 		}
 	}
 }

@@ -43,7 +43,7 @@ public class GameState : MonoBehaviour {
 	
 	void releaseGrab(){
 		if (currentGrab != null) {
-			audio.Play();
+			//audio.Play();
 		}
 		currentGrab = null;
 		linkEnd1.isKinematic = false;
