@@ -77,14 +77,14 @@ public class LevelGenerator : MonoBehaviour {
       new Vector3(x + curve.getOffset(previousCoordinateY + y), previousCoordinateY + y, 10.0f),
       rotation) as GameObject;
     previousCoordinateY = previousCoordinateY + y;    
-    PolygonCollider2D rockCollider = rockObj.GetComponent<PolygonCollider2D>();
-    Vector2[] pointsRockCollider = rockCollider.points;
-    for (int j = 0; j < pointsRockCollider.Length; j++) {
-      float randX = Random.Range(0, 10) / 10.0f - 0.5f;
-      float randY = Random.Range(0, 10) / 10.0f - 0.5f;
-      pointsRockCollider[j] = pointsRockCollider[j] + new Vector2(randX, randY);
-    }
-    rockCollider.points = pointsRockCollider;
+//    PolygonCollider2D rockCollider = rockObj.GetComponent<PolygonCollider2D>();
+//    Vector2[] pointsRockCollider = rockCollider.points;
+//    for (int j = 0; j < pointsRockCollider.Length; j++) {
+//      float randX = Random.Range(0, 10) / 10.0f - 0.5f;
+//      float randY = Random.Range(0, 10) / 10.0f - 0.5f;
+//      pointsRockCollider[j] = pointsRockCollider[j] + new Vector2(randX, randY);
+//    }
+//    rockCollider.points = pointsRockCollider;
     return previousCoordinateY;  
   }
     
