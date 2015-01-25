@@ -7,6 +7,11 @@ public class GameState : MonoBehaviour {
 	
 	public Rigidbody2D currentGrab;
 	
+	public bool hasWon = false;
+  private bool victoryDisplayed = false;
+  
+  public GameObject victoryText;
+	
 	// Use this for initialization
 	void Start () {
 	}
@@ -18,11 +23,11 @@ public class GameState : MonoBehaviour {
 			  grab();
 		} else {
       releaseGrab();
-//      print("release");
     }
-//		else if(!Input.GetKey(KeyCode.Space) && currentGrab != null){
-//			releaseGrab();
-//		}
+    if (hasWon && !victoryDisplayed) {
+      Instantiate (victoryText);
+      victoryDisplayed = true;
+    }
 	}
 	
 	public Rigidbody2D getFree(){

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Victory : MonoBehaviour {
 
+  public GameState gameState;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,6 +16,6 @@ public class Victory : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D() {
-		print ("victory");
+    gameState.hasWon = true;
 	}
 }
