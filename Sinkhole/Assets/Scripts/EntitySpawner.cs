@@ -11,7 +11,7 @@ public class EntitySpawner : MonoBehaviour {
 	
 	// Timer
 	float time = 0f;
-	float timeLimit = 4f;
+	float timeLimit = 3f;
 	
 	// Use this for initialization
 	void Start () {
