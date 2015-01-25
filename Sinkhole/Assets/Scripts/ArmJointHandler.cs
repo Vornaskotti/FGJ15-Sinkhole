@@ -50,7 +50,7 @@ public class ArmJointHandler : MonoBehaviour {
 	}
 	
 	void deactivatePersonsRecursive(Transform torso){
-		print ("deactivating "  + torso.name);
+		//print ("deactivating "  + torso.name);
 		if(torso.GetComponent<Swinging>().enabled){
 			torso.GetComponent<Swinging>().enabled = false;
 			Transform leftHand = torso.transform.FindChild("left_arm");
@@ -58,13 +58,15 @@ public class ArmJointHandler : MonoBehaviour {
 			
 			if(getNextEnd(leftHand) != null){
 				Transform leftTorso = getNextEnd(leftHand).parent;
-				print ("leftTorso" + leftTorso.name);
+				leftHand.GetComponent<Grabable>().letGo();
+				//print ("leftTorso" + leftTorso.name);
 				deactivatePersonsRecursive(leftTorso);
 				
 			}
 			if(getNextEnd(rightHand) != null){
 				Transform rightTorso = getNextEnd(rightHand).parent;
-				print ("rightTorso" + rightTorso.name);
+				rightHand.GetComponent<Grabable>().letGo();
+				//print ("rightTorso" + rightTorso.name);
 				deactivatePersonsRecursive(rightTorso);
 			}
 		}
@@ -110,7 +112,6 @@ public class ArmJointHandler : MonoBehaviour {
 	void handleBreakGrabbed(){
 		Transform holdHandPair = 
 			gameState.currentGrab.GetComponent<HingeJoint2D>().connectedBody.GetComponent<Grabable>().pairObject;
-		print (holdHandPair);
 		
 
 		Transform nextEnd = getLastEnd(holdHandPair);
