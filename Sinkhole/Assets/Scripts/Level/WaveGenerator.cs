@@ -19,6 +19,8 @@ public class WaveGenerator : MonoBehaviour {
 	private int checkCounter;
   
   public float levelWidth;
+  
+  public Vector3 offset;
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,6 +38,7 @@ public class WaveGenerator : MonoBehaviour {
 			int rWave = Random.Range(0, waves.Length);
 			Wave wave = Instantiate(waves[rWave]) as Wave;
       wave.follow = this.transform;
+      wave.offset = offset;
 //      float x = Random.Range(-levelWidth/2.0f + 1.0f, levelWidth/2.0f - 1.0f);
 //      wave.offset = new Vector3(x, 0, 0);
 		}

@@ -8,6 +8,8 @@ public class EntitySpawner : MonoBehaviour {
 	public GameObject entity;
   
   public Transform follow;
+  
+  public Vector3 offset;
 	
 	// Timer
 	float time = 0f;
@@ -42,10 +44,11 @@ public class EntitySpawner : MonoBehaviour {
     } else {
     }
 		float y = this.transform.position.y;
+    
 //		LevelGenerator levelGenerator = lvlGen.GetComponent<LevelGenerator>();
 //		Curve curve = levelGenerator.curve;
 		float x = Random.Range (-levelWidth/2f, levelWidth/2f) + transform.position.x;
-		Instantiate(entity, new Vector3(x, y, 0f), Quaternion.identity);
+		Instantiate(entity, new Vector3(x, y, 0f) + offset, Quaternion.identity);
 	}
 	
 //	float getOffset(float y) {

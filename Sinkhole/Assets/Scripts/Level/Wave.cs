@@ -14,6 +14,8 @@ public class Wave : MonoBehaviour {
   
   public double waveLife;
   
+  public Vector3 offset;
+  
 //  private float[] points;
 
 	// Use this for initialization
@@ -33,7 +35,7 @@ public class Wave : MonoBehaviour {
 	void Update () {
     lifeTimer += Time.deltaTime;
     if (follow != null) {
-      transform.position = follow.position;
+      transform.position = follow.position + offset;
     }
     if (lifeTimer > waveLife) {
       Destroy(gameObject);
