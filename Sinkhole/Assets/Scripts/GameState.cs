@@ -18,11 +18,15 @@ public class GameState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.R)) {  
+			Application.LoadLevel (0);  
+		}  
+		
 		if(Input.GetKey(KeyCode.Space)) {
-      if (currentGrab == null)
-			  grab();
+	    if (currentGrab == null)
+			grab();
 		} else {
-      releaseGrab();
+	    releaseGrab();
     }
     if (hasWon && !victoryDisplayed) {
       Instantiate (victoryText);
