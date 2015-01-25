@@ -38,7 +38,6 @@ public class EntitySpawner : MonoBehaviour {
 		Curve curve = levelGenerator.curve;
 		float x = Random.Range (-levelWidth/2f, levelWidth/2f) + curve.getOffset(y);
 		Instantiate(cow, new Vector3(x, y, 0f), Quaternion.identity);
-		Debug.Log("Cow Spawned!");
 	}
 	
 	float getOffset(float y) {
