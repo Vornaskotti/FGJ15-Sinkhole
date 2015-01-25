@@ -11,6 +11,8 @@ public class GameState : MonoBehaviour {
   private bool victoryDisplayed = false;
   
   public GameObject victoryText;
+  
+  public AudioSource jumpAudio;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,6 +38,9 @@ public class GameState : MonoBehaviour {
 	}
 	
 	void releaseGrab(){
+		if (currentGrab != null) {
+			audio.Play();
+		}
 		currentGrab = null;
 		linkEnd1.isKinematic = false;
 		linkEnd2.isKinematic = false;
