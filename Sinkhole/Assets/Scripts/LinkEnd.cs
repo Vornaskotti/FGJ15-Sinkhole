@@ -4,14 +4,19 @@ using System.Collections.Generic;
 
 public class LinkEnd : MonoBehaviour {
 	// Use this for initialization
+	private GameState gameState;
 	private Rigidbody2D currentParent;
 	private HingeJoint2D joint;
   
   public bool canGrab = false;
 	
 	void Start () {
+		gameState = GameObject.Find("GameState").GetComponent<GameState>();
 		joint = this.GetComponent<HingeJoint2D>();
 		currentParent = joint.connectedBody;
+		if(currentParent.GetComponent<Swinging>() != null){
+			currentParent.GetComponent<Swinging>().enabled = true;
+		}
 	}
 	
 	// Update is called once per frame
@@ -21,7 +26,7 @@ public class LinkEnd : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		Grabable otherGrab = other.GetComponent<Grabable>();
-		if(otherGrab != null && otherGrab.grabable) { // Grab and move link end to link's new end
+		if(otherGrab != null && otherGrab.grabable && gameState.currentGrab != rigidbody2D) { // Grab and move link end to link's new end
 		
 			HingeJoint2D newJoint = currentParent.gameObject.AddComponent("HingeJoint2D") as HingeJoint2D;
 	
@@ -35,6 +40,11 @@ public class LinkEnd : MonoBehaviour {
 			newJoint.anchor = parentGrab.grabPoint;
 			newJoint.connectedBody = other.rigidbody2D;
 			newJoint.connectedAnchor = other.gameObject.GetComponent<Grabable>().grabPoint;
+			
+			if(other.transform.parent.GetComponent<Swinging>() != null){
+				//print ("enabled swinging in" + other.transform.parent.name);
+				other.transform.parent.GetComponent<Swinging>().enabled = true;
+			}
 			
 			Transform otherHand = getOtherHand(other.transform);
 			joint.connectedBody = otherHand.rigidbody2D;
