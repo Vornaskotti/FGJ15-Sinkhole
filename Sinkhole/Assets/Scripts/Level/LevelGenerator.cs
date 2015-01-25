@@ -6,9 +6,7 @@ public class LevelGenerator : MonoBehaviour {
 	public GameObject wall;
   public GameObject background;
   
-  public GameObject rockA;
-  public GameObject rockB;
-  public GameObject rockC;
+  public GameObject[] rocks;
 	
 	public int levelHeight;
   public int backgroundHeight;
@@ -58,15 +56,9 @@ public class LevelGenerator : MonoBehaviour {
 	}
   
   float addRock(float previousCoordinateY, Curve curve) {
-    int r = Random.Range(0, 3);
-    GameObject rock;
-    if (r == 0) {
-      rock = rockA;
-    } else if (r == 1) {
-      rock = rockB;
-    } else {
-      rock = rockC;
-    }
+    int r = Random.Range(0, rocks.Length);
+    GameObject rock = rocks[r];
+
     int x = Random.Range(2, (int)levelWidth - 2) - (int)(levelWidth / 2.0f);
     int y = Random.Range(minRockDistance, maxRockDistance);
     
