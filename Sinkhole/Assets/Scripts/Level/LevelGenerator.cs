@@ -40,7 +40,7 @@ public class LevelGenerator : MonoBehaviour {
       rightWallGen.createRightWall(wallHeight, curve);
     }
     
-    for (int i = backgroundHeight; i < levelHeight; i += backgroundHeight) {
+    for (int i = backgroundHeight; i < levelHeight - backgroundHeight; i += backgroundHeight) {
     	Instantiate(background, new Vector3(0, i + backgroundHeight / 2, 20.0f), Quaternion.identity);
     }
     
