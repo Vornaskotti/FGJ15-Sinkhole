@@ -29,7 +29,8 @@ public class Curve {
     float a = points[lowerIndex];
     float b = points[upperIndex];
     float mu = yStep - lowerIndex;
-    return cosineInterpolate(a, b, mu);
+    return 0.0f;
+//    return cosineInterpolate(a, b, mu);
   }
 	
 	float[] createCurveAnchors(int length, float min, float max) {
